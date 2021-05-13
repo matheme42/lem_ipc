@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 15:42:13 by matheme           #+#    #+#             */
-/*   Updated: 2021/03/22 15:07:29 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/13 13:58:32 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ for shared_memory
 
 #include <signal.h> // une to catch signal ctrl-c
 
+
+#include <time.h>	// for the rand function
+
 # define TRUE	0
 # define FALSE	1
 
@@ -53,7 +56,7 @@ for shared_memory
 # define ARENASIZE_Y	10 // MAX 255
 
 # define MAX_PLAYERS	(ARENASIZE_X * ARENASIZE_Y) / 5
-# define MAX_TEAMS		(ARENASIZE_X * ARENASIZE_Y) / 25
+# define MAX_TEAMS		(ARENASIZE_X / 5) * (ARENASIZE_Y / 5)
 
 
 // STRUCTURE DES DONNEES DE JEUX
@@ -62,6 +65,14 @@ typedef struct	player_list
 				unsigned int team_id;
 				unsigned int player_id;
 }				t_player_list;
+
+
+typedef struct	team_list
+{
+	int				team_id;
+	int				nb_player;
+	unsigned int	player_id[MAX_PLAYERS];
+}				t_team_list;
 
 typedef struct	arena_data
 {
@@ -110,6 +121,9 @@ int				waitforuser(int pid);
 void			game_started();
 int				joingame(int pid);
 int				leavegame(int pid);
+
+// FONCTION DE LA PARTIE
+void			game_loop();
 
 
 // FONCTIONS DE COMMUNICATION INTER-PROCESSUS

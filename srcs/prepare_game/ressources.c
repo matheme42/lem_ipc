@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:33:35 by matheme           #+#    #+#             */
-/*   Updated: 2021/03/22 16:09:38 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 16:51:22 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void initialize_ressources()
 		ft_bzero(data.srv, sizeof(data.srv));
 		data.srv->size_x = ARENASIZE_X;
 		data.srv->size_y = ARENASIZE_Y;
-		data.srv->time = 200;
+		data.srv->time = 50;
 		data.server = 1;
 	}
 }

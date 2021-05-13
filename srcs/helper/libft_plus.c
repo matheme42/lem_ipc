@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/22 13:00:30 by matheme           #+#    #+#             */
-/*   Updated: 2021/03/22 15:07:18 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 17:06:51 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,4 @@ int isin(int nb, int *tab, int len)
 		i++;
 	}
 	return (FALSE);
-}
-
-
-void update_team_list()
-{
-	int i;
-
-	i = -1;
-	ft_bzero(data.srv->team_list, MAX_TEAMS);
-	data.srv->nb_team = 0;
-	while (++i < data.srv->nb_player)
-	{
-		if (isin(data.srv->player_list[i].team_id, data.srv->team_list, data.srv->nb_team))
-			data.srv->team_list[data.srv->nb_team++] = data.srv->player_list[i].team_id;
-	}
 }

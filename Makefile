@@ -13,7 +13,7 @@ WHITE_BOLD = \033[37m
 NAME = lem_ipc
 
 #sources path
-SRC_PATH		= srcs
+SRC_PATH		= srcs/*
 
 #objects path
 OBJ_PATH		= objs
@@ -23,7 +23,7 @@ INC_PATH		= includes
 HEADER			= $(INC_PATH)/lem_ipc.h $(INC_PATH)/lem_ipc_message_type.h
 
 # sources
-NAME_SRC		=	main.c ressources.c debug.c start.c parse.c msg_tools.c join_leave.c wait_for_user.c libft_plus.c
+NAME_SRC		=	main.c ressources.c debug.c start.c parse.c msg_tools.c join_leave.c wait_for_user.c libft_plus.c game_loop.c
 
 # objects
 NAME_OBJ		= $(addprefix $(OBJ_PATH)/,$(NAME_SRC:.c=.o))

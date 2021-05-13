@@ -39,13 +39,15 @@ int main(int ac, char **av)
 
 	// client
 	if (!data.server && !joingame(getpid()))
-		ft_printf("\ri'm the player %u/%-20d\n", data.player_id, MAX_PLAYERS);
+		ft_printf("\ri'm the player %u/%-20d (%d-%d)\n", data.player_id, MAX_PLAYERS, data.posyx.x, data.posyx.y);
 
 	// serveur
 	if (data.server && !waitforuser(getpid())){
 		game_started();
-		ft_printf("\ri'm the player %u/%-30d\n", data.player_id, MAX_PLAYERS);
+		ft_printf("\ri'm the player %u/%-30d (%d-%d)\n", data.player_id, MAX_PLAYERS, data.posyx.x, data.posyx.y);
 	}
+
+	game_loop();
 
 	if (data.server)
 	{
@@ -53,5 +55,6 @@ int main(int ac, char **av)
 		usleep(500000);
 		delete_ressources();
 	}
+	put_arena();
 	return (TRUE);
 }

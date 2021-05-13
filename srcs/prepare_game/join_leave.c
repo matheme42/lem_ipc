@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 17:06:01 by matheme           #+#    #+#             */
-/*   Updated: 2021/03/22 15:15:04 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/12 16:50:02 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int joingame(int pid)
 		return (FALSE);
 	}
 	data.player_id = id; // the id of the process is set
+	data.posyx.x = arg(msg, "x");
+	data.posyx.y = arg(msg, "y");
 	return (TRUE);
 }
 
