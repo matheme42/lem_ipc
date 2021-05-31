@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 17:00:26 by matheme           #+#    #+#             */
-/*   Updated: 2021/05/12 17:03:04 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/13 14:04:56 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,19 @@ static t_player_posyx get_start_position(int teamid)
 // Cette fonction envoie l'ID et la position du joueur au joueur
 void game_started()
 {
-	int	i;
-	t_player_posyx	player;
+	// int	i;
+	// t_player_posyx	player;
 
-	i = 0;
-	data.player_id = 1;
-	data.srv->player_list[0].player_id = 1;
-	player = get_start_position(data.srv->player_list[0].team_id);
-	data.posyx.x = player.x;
-	data.posyx.y = player.y;
-	while (++i < data.srv->nb_player)
-	{
-		player = get_start_position(data.srv->player_list[i].team_id);
-		while (send_msg(data.srv->player_list[i].player_id, (char[4][10]){"id", "x", "y"}, (int[4]){i + 1, player.x, player.y}, 3));
-		data.srv->player_list[i].player_id = i + 1;
-	}
+	// i = 0;
+	// data.player_id = 1;
+	// data.srv->player_list[0].player_id = 1;
+	// player = get_start_position(data.srv->player_list[0].team_id);
+	// data.posyx.x = player.x;
+	// data.posyx.y = player.y;
+	// while (++i < data.srv->nb_player)
+	// {
+	// 	player = get_start_position(data.srv->player_list[i].team_id);
+	// 	while (send_msg(data.srv->player_list[i].player_id, (char[4][10]){"id", "x", "y"}, (int[4]){i + 1, player.x, player.y}, 3));
+	// 	data.srv->player_list[i].player_id = i + 1;
+	// }
 }

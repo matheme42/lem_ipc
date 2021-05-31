@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 15:42:13 by matheme           #+#    #+#             */
-/*   Updated: 2021/05/13 13:58:32 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/13 14:07:58 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,6 @@ for shared_memory
 
 
 // STRUCTURE DES DONNEES DE JEUX
-typedef struct	player_list
-{
-				unsigned int team_id;
-				unsigned int player_id;
-}				t_player_list;
-
-
 typedef struct	team_list
 {
 	int				team_id;
@@ -76,14 +69,9 @@ typedef struct	team_list
 
 typedef struct	arena_data
 {
-				unsigned char	size_x;
-				unsigned char	size_y;
+				int				time;								// temps d'attente avant de commencer la partie
 				char			arena[ARENASIZE_X][ARENASIZE_Y];
-				int				nb_player;							// the number of player inside the game
-				int				nb_team;
-				int				time;								// temps avant le debut de la partie
-				t_player_list	player_list[MAX_PLAYERS];			// list of association between team_id & player_id
-				int				team_list[MAX_TEAMS];				// team list
+				t_team_list		teams[MAX_TEAMS];
 }				t_arena_data;
 
 
@@ -98,6 +86,7 @@ typedef struct	lem_ipc
 {
 	int				server;		// 1 if the current process is the server
 	t_arena_data	*srv;		// share memory ptr
+
 	int				msqid;		// msg queue id
 	int				semid;		// semaphore id
 	int				shmid;		// share memory id

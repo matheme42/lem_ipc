@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 16:33:35 by matheme           #+#    #+#             */
-/*   Updated: 2021/05/12 16:51:22 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/13 14:04:29 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ static void initialize_ressources()
 {
 	if (msgget(data.game_id, IPC_EXCL) == -1) {
 		ft_bzero(data.srv, sizeof(data.srv));
-		data.srv->size_x = ARENASIZE_X;
-		data.srv->size_y = ARENASIZE_Y;
 		data.srv->time = 50;
 		data.server = 1;
 	}

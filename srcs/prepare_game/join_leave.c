@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 17:06:01 by matheme           #+#    #+#             */
-/*   Updated: 2021/05/12 16:50:02 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/13 14:05:37 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int joingame(int pid)
 		return (FALSE);
 	} else if (id == 1) // deviens le serveur
 	{
-		data.srv->nb_player--;
+//@todo		data.srv->nb_player--;
 		data.server = 1;
 		return (FALSE);
 	}

@@ -6,7 +6,7 @@
 /*   By: matheme <matheme@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/24 14:03:01 by matheme           #+#    #+#             */
-/*   Updated: 2021/05/12 17:07:00 by matheme          ###   ########lyon.fr   */
+/*   Updated: 2021/05/13 14:11:57 by matheme          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ void update_team_list()
 	int i;
 
 	i = -1;
-	ft_bzero(data.srv->team_list, MAX_TEAMS);
-	data.srv->nb_team = 0;
-	while (++i < data.srv->nb_player)
-	{
-		if (isin(data.srv->player_list[i].team_id, data.srv->team_list, data.srv->nb_team))
-			data.srv->team_list[data.srv->nb_team++] = data.srv->player_list[i].team_id;
-	}
+	// @todo
+	// ft_bzero(data.srv->team_list, MAX_TEAMS);
+	// data.srv->nb_team = 0;
+	// while (++i < data.srv->nb_player)
+	// {
+	// 	if (isin(data.srv->player_list[i].team_id, data.srv->team_list, data.srv->nb_team))
+	// 		data.srv->team_list[data.srv->nb_team++] = data.srv->player_list[i].team_id;
+	// }
 }
 
 
@@ -50,18 +51,19 @@ static int accept_decline_process(char *rcvstr)
 
 	pid = arg(rcvstr, "id");
 	team_id = arg(rcvstr, "id_team");
-	if (data.srv->nb_player < MAX_PLAYERS)
+//@todo	if (data.srv->nb_player < MAX_PLAYERS)
 	{
-		if (data.srv->nb_team == MAX_TEAMS && isin(team_id, data.srv->team_list, data.srv->nb_team))
+	//@todo	if (data.srv->nb_team == MAX_TEAMS && isin(team_id, data.srv->team_list, data.srv->nb_team))
 		{
 			if (send_msg(pid, (char[4][10]){"id"}, (int[4]){-2}, 1))
 				return (FALSE);
 			return (TRUE);
 		}
-		
-		data.srv->player_list[data.srv->nb_player].player_id = pid;
-		data.srv->player_list[data.srv->nb_player].team_id = team_id;
-		data.srv->nb_player++;
+
+		// @todo		
+		// data.srv->player_list[data.srv->nb_player].player_id = pid;
+		// data.srv->player_list[data.srv->nb_player].team_id = team_id;
+		// data.srv->nb_player++;
 		update_team_list();
 		return (TRUE);
 	}
@@ -83,18 +85,19 @@ static void remove_process_from_list(int pid)
 
 	i = 0;
 	find = 0;
-	while (i < data.srv->nb_player)
-	{
-		if (find == 1) {
-			data.srv->player_list[i - 1].player_id = data.srv->player_list[i].player_id;
-			data.srv->player_list[i - 1].team_id = data.srv->player_list[i].team_id;
-		}
-		if (data.srv->player_list[i].player_id == pid)
-			find = 1;
-		i++;
-	}
-	ft_bzero(&data.srv->player_list[i - 1], sizeof(data.srv->player_list[i - 1]));
-	data.srv->nb_player--;
+	// @todo
+	// while (i < data.srv->nb_player)
+	// {
+	// 	if (find == 1) {
+	// 		data.srv->player_list[i - 1].player_id = data.srv->player_list[i].player_id;
+	// 		data.srv->player_list[i - 1].team_id = data.srv->player_list[i].team_id;
+	// 	}
+	// 	if (data.srv->player_list[i].player_id == pid)
+	// 		find = 1;
+	// 	i++;
+	// }
+	// ft_bzero(&data.srv->player_list[i - 1], sizeof(data.srv->player_list[i - 1]));
+	// data.srv->nb_player--;
 }
 
 // SUPPRIMER UN PROCESSUS DU JEU
@@ -125,7 +128,7 @@ static void switch_serveur()
 {
 	char	msg[MSGSZ];
 	
-	while (send_msg(data.srv->player_list[0].player_id, (char[4][10]){"id"}, (int[4]){1}, 1));
+	//@todo while (send_msg(data.srv->player_list[0].player_id, (char[4][10]){"id"}, (int[4]){1}, 1));
 	data.server = 0;
 }
 
@@ -144,15 +147,15 @@ int waitforuser(int pid)
 	char	msg[MSGSZ];
 
 	data.player_id = pid;
-	data.srv->nb_player++;
-	data.srv->player_list[0].player_id = data.player_id;
-	data.srv->player_list[0].team_id = data.team_id;
+	// data.srv->nb_player++;
+	// data.srv->player_list[0].player_id = data.player_id;
+	// data.srv->player_list[0].team_id = data.team_id;
 	update_team_list();
 	while (data.srv->time > 0)
 	{
 		usleep(98000);
 		data.srv->time--;
-		ft_printf("\rthe game will start in: %2d.%ds (%d/%d) (%d)", data.srv->time / 10, data.srv->time % 10, data.srv->nb_player, MAX_PLAYERS, data.srv->nb_team);
+		//ft_printf("\rthe game will start in: %2d.%ds (%d/%d) (%d)", data.srv->time / 10, data.srv->time % 10, data.srv->nb_player, MAX_PLAYERS, data.srv->nb_team);
 
 		if (rcv_msg(msg, MSG_TYPE_CL_JOIN_GAME, IPC_NOWAIT) > 0) {
 			while (accept_decline_process(msg));
@@ -162,14 +165,14 @@ int waitforuser(int pid)
 		}
 		if (rcv_msg(msg, pid, IPC_NOWAIT) > 0) {
 			ft_printf("\ryou leave this game ($%d)                            \n", data.game_id);
-			if (data.srv->nb_player > 0)
-			 	switch_serveur();
+		//	if (data.srv->nb_player > 0)
+		//	 	switch_serveur();
 			return (FALSE);
 		}
 
-		if (data.srv->nb_player == MAX_PLAYERS && data.srv->time > 100) {
-			data.srv->time = 100;
-		}
+		// if (data.srv->nb_player == MAX_PLAYERS && data.srv->time > 100) {
+		// 	data.srv->time = 100;
+		// }
 	}
 	return (TRUE);
 }
